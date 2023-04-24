@@ -7,7 +7,7 @@
 trm_colors(farver)
 }
 \arguments{
-\item{farver}{Choose between these colors c("blå", "orange","grå", "gul","grøn", "lyseblå")}
+\item{farver}{Choose between these colors c("blaa", "orange","graa", "gul","groen", "lyseblaa")}
 }
 \description{
 Farver i TRM

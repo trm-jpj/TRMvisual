@@ -4,7 +4,7 @@ theme_trm <- function(left_margin, right_margin, text_size){
                  axis.ticks = ggplot2::element_blank(),
                  axis.text = ggplot2::element_text(size = text_size, family = "Georgia"),
                  legend.position="bottom",
-                 legend.margin = margin(b = 0.5, unit = "cm"),
+                 legend.margin = ggplot2::margin(b = 0.5, unit = "cm"),
                  legend.key.height = grid::unit(0.4, 'cm'),
                  legend.spacing.y = grid::unit(0.4, 'cm'),
                  legend.background = ggplot2::element_rect(fill = "#ECECEC" ),
