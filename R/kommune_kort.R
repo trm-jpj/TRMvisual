@@ -28,7 +28,7 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver){
                    msg = "Når der er tale om en numerisk variabel skal der være 3 farver: Low, mid og high" )
     
     scale_fill <- ggplot2::scale_fill_gradient2(
-      low=farver[1], mid=farver[2], high=farver[3])
+      low=farver[1], mid=farver[2], high=farver[3], midpoint = (max(input[[var]], na.rm = T) - min(input[[var]], na.rm = T))/2)
     
   }
   
@@ -45,11 +45,12 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver){
     ggplot2::theme_void() +
     # ggplot2::theme_void() +
     # xlim(56,57) + #Afgr?nser x-aksen
-    ggplot2::theme(legend.position = c(0.93, 0.35),
-                   legend.key.size = grid::unit(0.6, "cm"),
-                   legend.key.width = grid::unit(0.3,"cm"),
-                   legend.title = ggplot2::element_text(size = 10),
-                   legend.text = ggplot2::element_text(size = 8)) 
+    ggplot2::theme( 
+      legend.position = c(0.93, 0.35),
+      legend.key.size = grid::unit(0.4, "cm"),
+      legend.key.width = grid::unit(0.2,"cm"),
+      legend.title = ggplot2::element_text(size = 8, family = "Georgia"),
+      legend.text = ggplot2::element_text(size = 6, family = "Georgia")) 
   
   k2 <- ggplot2::ggplot() + 
     ggplot2::geom_sf(data = input |> dplyr::filter(as.numeric(.data$kode)==400),
@@ -67,12 +68,12 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver){
   
   dk_kort <- cowplot::ggdraw(k1) +
     cowplot::draw_plot(k2,
-              x = 0.65, 
-              # The distance along a (0,1) y-axis to draw the bottom edge of the plot
-              y = 0.72,
-              # The width and height of the plot expressed as proportion of the entire ggdraw object
-              width = 0.2, 
-              height = 0.2
+                       x = 0.65, 
+                       # The distance along a (0,1) y-axis to draw the bottom edge of the plot
+                       y = 0.72,
+                       # The width and height of the plot expressed as proportion of the entire ggdraw object
+                       width = 0.2, 
+                       height = 0.2
     )
   
   return(dk_kort)     
