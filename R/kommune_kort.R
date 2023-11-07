@@ -5,7 +5,7 @@
 #' }
 #' @importFrom rlang .data
 #' @export
-kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_farve = "darkgrey"){
+kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_farve = "darkgrey", midpoint=NULL){
   
   if(!methods::is(input[[var]], "numeric")){
     
@@ -34,9 +34,11 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
     assert::assert(length(farver) == 3,
                    msg = "Når der er tale om en numerisk variabel skal der være 3 farver: Low, mid og high" )
     
+    if(is.null(midpoint)) midpoint <- max(input[[var]], na.rm = T) - (abs(max(input[[var]], na.rm = T)) + abs(min(input[[var]], na.rm = T)))/2
+    
     scale_fill <- ggplot2::scale_fill_gradient2(
       low=farver[1], mid=farver[2], high=farver[3], 
-      midpoint = max(input[[var]], na.rm = T) - (abs(max(input[[var]], na.rm = T)) + abs(min(input[[var]], na.rm = T)))/2, 
+      midpoint = midpoint, 
       na.value=NA_farve)
     
   }
