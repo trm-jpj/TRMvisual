@@ -42,7 +42,7 @@ add_to_excel <- function(fil, sheet_navn, data_frame, figur=NULL, overwrite = FA
   #++++++++++++++++++++++++++++++++++++
   # create a png plot
   if(!is.null(figur)){
-    grDevices::png("plot_til_figur.png", height=91.6, width=167.4, units = "mm", res = 250, pointsize = 8 )
+    grDevices::png("plot_til_figur.png", height=101.6, width=130.4, units = "mm", res = 250, pointsize = 8 )
     plot(figur)
     grDevices::dev.off()
     
