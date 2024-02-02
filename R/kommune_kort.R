@@ -43,7 +43,11 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
     
   }
   
-  spacing <- input[[var]] |> round(0) |>  as.character() |> str_length() |> max(na.rm = T)-1
+  if(methods::is(input[[var]], "numeric")){
+    spacing <- input[[var]] |> round(0) |>  as.character() |> str_length() |> max(na.rm = T)-1
+  } else{
+    spacing = 1
+  }
   
   kommuner_til_zoom <- c(101, 147, 155, 185, 165, 151, 153, 157, 159, 161, 163, 167, 169, 183, 173, 175, 187, 201, 240, 190, 223, 230)
   
@@ -70,7 +74,7 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
     # ggplot2::theme_void() +
     # xlim(56,57) + #Afgr?nser x-aksen
     ggplot2::theme( 
-      legend.position = c(0.87, 0.75),
+      legend.position = c(0.77, 0.75),
       legend.key.size = grid::unit(0.4, "cm"),
       legend.key.width = grid::unit(0.2,"cm"),
       legend.spacing.x = grid::unit(spacing/10, "cm"),
