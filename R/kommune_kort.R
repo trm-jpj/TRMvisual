@@ -44,15 +44,15 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
   }
   
   if(methods::is(input[[var]], "numeric")){
-    spacing <- input[[var]] |> round(0) |>  as.character() |> str_length() |> max(na.rm = T)-1
+    spacing <- input[[var]] |> round(0) |>  as.character() |> stringr::str_length() |> max(na.rm = T)-1
   } else{
     spacing = 1
   }
   
   kommuner_til_zoom <- c(101, 147, 155, 185, 165, 151, 153, 157, 159, 161, 163, 167, 169, 183, 173, 175, 187, 201, 240, 190, 223, 230)
   
-  var_1 <- input %>% names() %>% str_subset("geometry", negate = T) %>% enframe(name = NULL) %>% 
-    mutate(koll = NA) %>% pivot_wider(names_from = "value", values_from = "koll")
+  var_1 <- input %>% names() %>% stringr::str_subset("geometry", negate = T) %>% tibble::enframe(name = NULL) %>% 
+    dplyr::mutate(koll = NA) %>% tidyr::pivot_wider(names_from = "value", values_from = "koll")
   
   # til_k1 <- rbind(input %>% 
   #                   dplyr::filter(!as.numeric(kode) %in% kommuner_til_zoom),
@@ -80,7 +80,7 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
       legend.spacing.x = grid::unit(spacing/10, "cm"),
       legend.title = ggplot2::element_text(size = 8, family = "Georgia"),
       legend.text = ggplot2::element_text(size = 6, family = "Georgia")) +
-    ggmagnify::geom_magnify(aes(from = as.numeric(kode) %in% kommuner_til_zoom),
+    ggmagnify::geom_magnify(aes(from = as.numeric(.data$kode) %in% kommuner_til_zoom),
                     to = c(13.3, 15.5 ,54.8 , 56), shadow = TRUE, 
                     aspect = "fixed", 
                     expand = 0)
@@ -93,7 +93,7 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
     ggplot2::scale_y_continuous(expand = c(0.08,0.08)) +
     ggplot2::scale_x_continuous(expand = c(0.1,0.1)) +
     ggplot2::theme(legend.position = "none",
-                   panel.background = element_rect(colour = "black", linewidth=0.5)
+                   panel.background = ggplot2::element_rect(colour = "black", linewidth=0.5)
                    # , 
                    # panel.border = element_rect(color = "black",
                    #                                   fill = NA,
