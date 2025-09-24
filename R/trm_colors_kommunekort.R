@@ -8,7 +8,7 @@ trm_colors_kommunekort <- function(type="gradient"){
     (\(y) y[!is.na(y)])() 
   
   farver <- switch(type,
-         "gradient" = c('#effbff','#00A9E0', '#003748'),
+         "gradient" = c('#F2683E','#7BB9CE', '#002447'),
          "continous" = farve_palette)
  
   return(factor(farver))

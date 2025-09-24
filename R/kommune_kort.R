@@ -34,7 +34,7 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
     assert::assert(length(farver) == 3,
                    msg = "Når der er tale om en numerisk variabel skal der være 3 farver: Low, mid og high" )
     
-    if(is.null(midpoint)) midpoint <- max(input[[var]], na.rm = T) - (abs(max(input[[var]], na.rm = T)) + abs(min(input[[var]], na.rm = T)))/2
+    if(is.null(midpoint)) midpoint <- mean(range(input[[var]], na.rm = TRUE))
     
     scale_fill <- ggplot2::scale_fill_gradient2(
       low=farver[1], mid=farver[2], high=farver[3], 
@@ -74,7 +74,7 @@ kommune_kort <- function(input, var, legend_title, legend_lab =NULL, farver, NA_
     # ggplot2::theme_void() +
     # xlim(56,57) + #Afgr?nser x-aksen
     ggplot2::theme( 
-      legend.position = c(0.77, 0.75),
+      legend.position = c(0.80, 0.75),
       legend.key.size = grid::unit(0.4, "cm"),
       legend.key.width = grid::unit(0.2,"cm"),
       legend.spacing.x = grid::unit(spacing/10, "cm"),
