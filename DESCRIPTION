@@ -20,4 +20,4 @@ Imports:
     methods,
     stringr,
     xlsx
-RoxygenNote: 7.2.1
+Config/roxygen2/version: 8.0.0

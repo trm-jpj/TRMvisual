@@ -4,10 +4,12 @@
 \alias{trm_colors}
 \title{Farver i TRM}
 \usage{
-trm_colors(farver)
+trm_colors(farver, lys = 0)
 }
 \arguments{
-\item{farver}{Choose between these colors c("blaa", "orange","graa", "gul","groen", "lyseblaa")}
+\item{farver}{Vælg mellem c("blaa", "cyan", "orange", "groen", "roed")}
+
+\item{lys}{Lyshedsgrad: 0 (fuld), 1, 2 eller 3}
 }
 \description{
 Farver i TRM
